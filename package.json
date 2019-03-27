@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "mocha \"test/**/*.test.js\""
+    "test": "npx mocha --require mocha-init \"test/**/*.test.js\""
   },
   "repository": {
     "type": "git",

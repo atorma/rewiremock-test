@@ -1,14 +1,18 @@
-describe('rewiremock', function() {
+describe('rewiremock callThrough', function() {
   const rewiremock = require('rewiremock/node');
+
+  let stubs;
+
+  beforeEach(function () {
+    stubs = {
+      doAnotherThing: sinon.stub()
+    };
+  });
 
   describe('should call through when dependency is a plain object', function () {
     let serviceUnderTest;
-    let stubs;
 
     beforeEach(function() {
-      stubs = {
-        doAnotherThing: sinon.stub()
-      };
       serviceUnderTest = rewiremock.proxy('./service', r => ({
         './dependency': r.callThrough().with(stubs)
       }));
@@ -22,12 +26,8 @@ describe('rewiremock', function() {
 
   describe('should call through when service and dependency are class instances', function () {
     let serviceUnderTest;
-    let stubs;
 
     beforeEach(function() {
-      stubs = {
-        doAnotherThing: sinon.stub()
-      };
       serviceUnderTest = rewiremock.proxy('./service-class-instance', r => ({
         './dependency-class-instance': r.callThrough().with(stubs)
       }));
